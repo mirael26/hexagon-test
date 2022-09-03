@@ -3,16 +3,22 @@ import { CombinedState } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 
 import { ActionType } from "./store/action";
+import { LoginError } from "./consts";
 
 // data
 
+export interface UserInfo {
+  username: string,
+  password: string,
+}
 
+export type LoginErrorType = keyof typeof LoginError;
 
 // reducers
 
 export interface UserState {
   authStatus: boolean,
-  loginError: string,
+  loginError: LoginErrorType,
   username: string,
 };
 
@@ -32,10 +38,10 @@ export interface UpdateAuthStatus {
   payload: boolean,
 }
 
-export interface UpdateLoginError {
-  type: typeof ActionType.UPDATE_LOGIN_ERROR,
-  payload: string,
+export interface AddLoginError {
+  type: typeof ActionType.ADD_LOGIN_ERROR,
+  payload: LoginErrorType,
 }
 
-export type UserAction = GetUsername | UpdateAuthStatus | UpdateLoginError;
+export type UserAction = GetUsername | UpdateAuthStatus | AddLoginError;
 export type Action = UserAction;
