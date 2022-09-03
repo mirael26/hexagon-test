@@ -3,7 +3,7 @@ import { CombinedState } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 
 import { ActionType } from "./store/action";
-import { LoginError } from "./consts";
+import { LoginError, RegisterError } from "./consts";
 
 // data
 
@@ -13,12 +13,14 @@ export interface UserInfo {
 }
 
 export type LoginErrorType = keyof typeof LoginError;
+export type RegisterErrorType = keyof typeof RegisterError;
 
 // reducers
 
 export interface UserState {
   authStatus: boolean,
   loginError: LoginErrorType,
+  registerError: RegisterErrorType,
   username: string,
 };
 
@@ -43,5 +45,10 @@ export interface AddLoginError {
   payload: LoginErrorType,
 }
 
-export type UserAction = GetUsername | UpdateAuthStatus | AddLoginError;
+export interface AddRegisterError {
+  type: typeof ActionType.ADD_REGISTER_ERROR,
+  payload: RegisterErrorType,
+}
+
+export type UserAction = GetUsername | UpdateAuthStatus | AddLoginError | AddRegisterError;
 export type Action = UserAction;

@@ -28,7 +28,8 @@ const Login = ():JSX.Element => {
     setFormValue({...formValue, [name]: value});
   }
 
-  const onFormSubmit = () => {
+  const onFormSubmit = (evt: React.SyntheticEvent) => {
+    evt.preventDefault();
     dispatch(login(formValue));
   }
 

@@ -5,6 +5,7 @@ const initialState: UserState = {
   username: null,
   authStatus: false,
   loginError: null,
+  registerError: null,
 };
 
 export const userReducer = (state = initialState, action: UserAction): UserState => {
@@ -15,6 +16,8 @@ export const userReducer = (state = initialState, action: UserAction): UserState
       return {...state, authStatus: action.payload};
     case ActionType.ADD_LOGIN_ERROR:
       return {...state, loginError: action.payload};
+    case ActionType.ADD_REGISTER_ERROR:
+      return {...state, registerError: action.payload};
     default:
       return state;
   }
