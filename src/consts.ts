@@ -10,6 +10,7 @@ export const ApiUrl = {
   REGISTER: '/register',
   SQUEEZE: '/squeeze',
   STATISTICS: '/statistics',
+  LINK: '/s'
 };
 
 export const LoginError = {

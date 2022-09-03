@@ -28,7 +28,7 @@ export const login = ({ username, password }: UserInfo) => {
         } else if (error.response.status == 422) {
           dispatch(ActionCreator.addLoginError(LoginError.VALIDATION_ERROR));
         } else {
-          dispatch(ActionCreator.addLoginError('LOGIN_ERROR'));
+          dispatch(ActionCreator.addLoginError(LoginError.LOGIN_ERROR));
         }
       });
   };
@@ -57,8 +57,37 @@ export const register = ({ username, password }: UserInfo) => {
     .catch(error => {
       if (error.response.status == 422) {
         dispatch(ActionCreator.addRegisterError(RegisterError.VALIDATION_ERROR));
+      } else  {
+        dispatch(ActionCreator.addRegisterError(RegisterError.REGISTER_ERROR));
+      }
+    });
+  };
+};
+
+export const getShortLink = (link: string) => {
+
+  return (dispatch: Dispatch) => {
+    axios({
+      method: 'post',
+      url: `${URL}${ApiUrl.SQUEEZE}`,
+      headers: {
+        'Authorization': 'Bearer <token>'
+      },
+      params: {
+        link
+      }
+    })
+    .then(response => {
+      dispatch(ActionCreator.getShortLink(`${URL}${ApiUrl.LINK}/${response.data.short}`));
+      dispatch(ActionCreator.addLinkError(null));
+    })
+    .catch(error => {
+      if (error.response.status == 422) {
+        dispatch(ActionCreator.addLinkError('Ошибка валидации'));
+      } else if (error.response.status == 401) {
+        dispatch(ActionCreator.addLinkError('Ошибка авторизации'));
       } else {
-        dispatch(ActionCreator.addRegisterError('REGISTER_ERROR'));
+        dispatch(ActionCreator.addLinkError('Пожалуйста, попробуйте позднее'));
       }
     });
   };
