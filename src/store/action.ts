@@ -1,10 +1,12 @@
-import { GetUsername, UpdateAuthStatus, AddLoginError, LoginErrorType, RegisterErrorType, AddRegisterError } from "../types";
+import { GetUsername, UpdateAuthStatus, AddLoginError, LoginErrorType, RegisterErrorType, AddRegisterError, GetShortLink, AddLinkError } from "../types";
 
 export const ActionType = {
   GET_USERNAME: "GET_USERNAME",
   UPDATE_AUTH_STATUS: "UPDATE_AUTH_STATUS",
   ADD_LOGIN_ERROR: "ADD_LOGIN_ERROR",
   ADD_REGISTER_ERROR: "ADD_REGISTER_ERROR",
+  GET_SHORT_LINK: "GET_SHORT_LINK",
+  ADD_LINK_ERROR: "ADD_LINK_ERROR",
 } as const;
 
 export const ActionCreator = {
@@ -23,5 +25,13 @@ export const ActionCreator = {
   addRegisterError: (registerError: RegisterErrorType): AddRegisterError => ({
     type: ActionType.ADD_REGISTER_ERROR,
     payload: registerError,
+  }),
+  getShortLink: (shortLink: string): GetShortLink => ({
+    type: ActionType.GET_SHORT_LINK,
+    payload: shortLink,
+  }),
+  addLinkError: (linkError: string): AddLinkError => ({
+    type: ActionType.ADD_LINK_ERROR,
+    payload: linkError,
   }),
 };

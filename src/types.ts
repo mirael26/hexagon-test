@@ -24,6 +24,11 @@ export interface UserState {
   username: string,
 };
 
+export interface DataState {
+  shortLink: string,
+  linkError: string,
+};
+
 export type Dispatch = ThunkDispatch<CombinedState<{
   user: UserState;
 }>, Axios, Action>;
@@ -50,5 +55,16 @@ export interface AddRegisterError {
   payload: RegisterErrorType,
 }
 
+export interface GetShortLink {
+  type: typeof ActionType.GET_SHORT_LINK,
+  payload: string,
+}
+
+export interface AddLinkError {
+  type: typeof ActionType.ADD_LINK_ERROR,
+  payload: string,
+}
+
 export type UserAction = GetUsername | UpdateAuthStatus | AddLoginError | AddRegisterError;
-export type Action = UserAction;
+export type DataAction = GetShortLink | AddLinkError;
+export type Action = UserAction | DataAction;
