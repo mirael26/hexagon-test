@@ -11,7 +11,7 @@ import Pagination from './Pagination/Pagination';
 import Sort from './Sort/Sort';
 import './Statistics.scss';
 
-const LINKS_MAX = 10;
+const LINKS_MAX = 10; // константа с отображаемым количеством строк на одной странице
 
 const Statistics = ():JSX.Element => {
   const [sortType, setSortType] = useState('asc_short');
@@ -23,12 +23,12 @@ const Statistics = ():JSX.Element => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getStatisticsTotal({order: 'asc_short', offset: 0, limit: 999999}));
+    dispatch(getStatisticsTotal({order: 'asc_short', offset: 0, limit: 999999})); // запрашиваем общее количество ссылок для пагинации
     dispatch(ActionCreator.addStatisticsError(null));
   }, []);
 
   useEffect(() => {
-    dispatch(getStatistics({order: sortType, offset: (currentPage - 1) * LINKS_MAX, limit: LINKS_MAX}));
+    dispatch(getStatistics({order: sortType, offset: (currentPage - 1) * LINKS_MAX, limit: LINKS_MAX})); // запрашиваем список ссылок для отображения в соответствии с сортировкой и пагинацией
     dispatch(ActionCreator.addStatisticsError(null));
   }, [sortType, currentPage]);
 

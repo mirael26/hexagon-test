@@ -15,8 +15,8 @@ const Header = ():JSX.Element => {
   const navigate = useNavigate();
 
   const onExitButtonClick = () => {
-    dispatch(ActionCreator.getUsername(null));
-    dispatch(ActionCreator.updateAuthStatus(false));
+    dispatch(ActionCreator.getUsername(null)); // удаляем имя пользователя
+    dispatch(ActionCreator.updateAuthStatus(false)); // удаляем статус аутентификации
     navigate(AppUrl.LOGIN);
   }
 

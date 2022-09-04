@@ -39,27 +39,27 @@ const Register = ():JSX.Element => {
   }
 
   const validateValue = (name: keyof UserInfo, value: string) => {
-    const nameUppercase = name.toUpperCase() as UserInfoConsts;
-    const minLength = eval(`${nameUppercase}_MIN_LENGTH`);
-    const formatValidity = RegExpTest[nameUppercase].test(value);
-    const lengthValidity = minLength ? value.length >= minLength : true;
+    const nameUppercase = name.toUpperCase() as UserInfoConsts; // создаем имя, записанное большими буквами для использования в константах
+    const minLength = eval(`${nameUppercase}_MIN_LENGTH`); // находим минимальную длину значения согласно записанным выше константам
+    const formatValidity = RegExpTest[nameUppercase].test(value); // проверяем соответствие значения формату через regexp
+    const lengthValidity = minLength ? value.length >= minLength : true; // если существует минимальное значение, проверяем, соответствует ли ему значение
 
     if (!formatValidity) {
-      setErrors({...errors, [name]: ErrorMessages[`${nameUppercase}_FORMAT_ERROR` as keyof typeof ErrorMessages]});
+      setErrors({...errors, [name]: ErrorMessages[`${nameUppercase}_FORMAT_ERROR` as keyof typeof ErrorMessages]}); // записываем ошибку формата, если проверка не пройдена
     }
 
     if (!lengthValidity) {
-      setErrors({...errors, [name]: ErrorMessages[`${nameUppercase}_LENGTH_ERROR` as keyof typeof ErrorMessages]});
+      setErrors({...errors, [name]: ErrorMessages[`${nameUppercase}_LENGTH_ERROR` as keyof typeof ErrorMessages]}); // записываем ошибку длины, если проверка не пройдена
     }
 
-    return formatValidity && lengthValidity;
+    return formatValidity && lengthValidity; // возвращаем общую валидность (true или false)
   }
 
   const onFormSubmit = (evt: React.SyntheticEvent) => {  
     evt.preventDefault();
     let isFormValid = true;
     for (let key in formValue) {
-      isFormValid = validateValue(key as keyof UserInfo, formValue[key as keyof UserInfo]) && isFormValid;
+      isFormValid = validateValue(key as keyof UserInfo, formValue[key as keyof UserInfo]) && isFormValid; // записываем невалидность формы если одно из значений не пршло валидацию
     }
     if (isFormValid) {
       dispatch(register(formValue));

@@ -20,18 +20,18 @@ const ErrorMessages = {
 const Login = ():JSX.Element => {
   const [formValue, setFormValue] = useState({username: '', password: ''});
 
-  const loginError = useSelector((state: RootState) => state.user.loginError)
+  const loginError = useSelector((state: RootState) => state.user.loginError);
   const dispatch = useDispatch();
 
   const changeInputValue = (evt: React.SyntheticEvent, name: string) => {
     const value = (evt.target as HTMLInputElement).value;
     setFormValue({...formValue, [name]: value});
-  }
+  };
 
   const onFormSubmit = (evt: React.SyntheticEvent) => {
     evt.preventDefault();
-    dispatch(login(formValue));
-  }
+    dispatch(login(formValue)); // отправляем запрос авторизации с данными из формы
+  };
 
   return (
     <div className="login">

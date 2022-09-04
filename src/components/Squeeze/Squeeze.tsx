@@ -23,11 +23,11 @@ const Squeeze = ():JSX.Element => {
   }, []);
 
   const onCopyButtonClick = () => {
-    navigator.clipboard.writeText(shortLink);
-    setCopyTooltipVisibility(true);
+    navigator.clipboard.writeText(shortLink); // копируем ссылку в буфер
+    setCopyTooltipVisibility(true); // отображаем окошко-уведомление о том, что ссылка скопирована
 
     setTimeout(() => {
-      setCopyTooltipVisibility(false);
+      setCopyTooltipVisibility(false); // устанавливаем таймер на исчезновение окошка-уведомления
     }, 3000)
   };
 

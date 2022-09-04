@@ -10,7 +10,7 @@ interface PaginationProps {
 
 const Pagination = ({pagesCount, currentPage, setCurrentPage}: PaginationProps):JSX.Element => {
   
-  const paginationButtons = Array(pagesCount).fill('');
+  const paginationButtons = Array(pagesCount).fill(''); // создаем пустой массив для отображения нужного количества страниц
 
   return (
     <div className="pagination">
