@@ -9,6 +9,7 @@ import ScreensLogin from './Login/Login';
 import ScreensRegister from './Register/Register';
 import ScreensSqueeze from './Squeeze/Squeeze';
 import ScreensStatistics from './Statistics/Statistics';
+import RequireAuth from '../components/RequireAuth/RequireAuth';
 
 export const history = createBrowserHistory();
 
@@ -18,8 +19,25 @@ const ScreensRoot = () => (
       <Route path='/' element={<Navigate replace to={AppUrl.LOGIN}/>} />
       <Route path={AppUrl.LOGIN} element={<ScreensLogin/>} />
       <Route path={AppUrl.REGISTER} element={<ScreensRegister/>} />
-      <Route path={AppUrl.SQUEEZE} element={<ScreensSqueeze/>} />
-      <Route path={AppUrl.STATISTICS} element={<ScreensStatistics/>} />
+
+      <Route
+        path={AppUrl.SQUEEZE}
+        element={
+          <RequireAuth redirectTo={AppUrl.LOGIN}>
+            <ScreensSqueeze />
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path={AppUrl.STATISTICS}
+        element={
+          <RequireAuth redirectTo={AppUrl.LOGIN}>
+            <ScreensStatistics />
+          </RequireAuth>
+        }
+      />
+
     </Routes>
   </HistoryRouter>
 );
