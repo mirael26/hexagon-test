@@ -33,6 +33,7 @@ const Squeeze = ():JSX.Element => {
 
   const onSqueezeFormSubmit = (evt: React.SyntheticEvent) => {
     evt.preventDefault();
+    dispatch(ActionCreator.getShortLink(null));
     dispatch(getShortLink(linkValue))
   }
 
