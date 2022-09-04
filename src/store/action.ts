@@ -1,4 +1,4 @@
-import { GetUsername, UpdateAuthStatus, AddLoginError, LoginErrorType, RegisterErrorType, AddRegisterError, GetShortLink, AddLinkError } from "../types";
+import { GetUsername, UpdateAuthStatus, AddLoginError, LoginErrorType, RegisterErrorType, AddRegisterError, GetShortLink, AddLinkError, LinkInfo, GetStatistics, AddStatisticsError, GetStatisticsTotal } from "../types";
 
 export const ActionType = {
   GET_USERNAME: "GET_USERNAME",
@@ -7,6 +7,9 @@ export const ActionType = {
   ADD_REGISTER_ERROR: "ADD_REGISTER_ERROR",
   GET_SHORT_LINK: "GET_SHORT_LINK",
   ADD_LINK_ERROR: "ADD_LINK_ERROR",
+  GET_STATISTICS: "GET_STATISTICS",
+  GET_STATISTICS_TOTAL: "GET_STATISTICS_TOTAL",
+  ADD_STATISTICS_ERROR: "ADD_STATISTICS_ERROR",
 } as const;
 
 export const ActionCreator = {
@@ -33,5 +36,17 @@ export const ActionCreator = {
   addLinkError: (linkError: string): AddLinkError => ({
     type: ActionType.ADD_LINK_ERROR,
     payload: linkError,
+  }),
+  getStatistics: (statistics: Array<LinkInfo>): GetStatistics => ({
+    type: ActionType.GET_STATISTICS,
+    payload: statistics,
+  }),
+  getStatisticsTotal: (statisticsTotal: number): GetStatisticsTotal => ({
+    type: ActionType.GET_STATISTICS_TOTAL,
+    payload: statisticsTotal,
+  }),
+  addStatisticsError: (statisticsError: string): AddStatisticsError => ({
+    type: ActionType.ADD_STATISTICS_ERROR,
+    payload: statisticsError,
   }),
 };

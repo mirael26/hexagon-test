@@ -10,7 +10,14 @@ import { LoginError, RegisterError } from "./consts";
 export interface UserInfo {
   username: string,
   password: string,
-}
+};
+
+export interface LinkInfo {
+  id: number,
+  short: string,
+  target: string,
+  counter: number,
+};
 
 export type LoginErrorType = keyof typeof LoginError;
 export type RegisterErrorType = keyof typeof RegisterError;
@@ -27,6 +34,9 @@ export interface UserState {
 export interface DataState {
   shortLink: string,
   linkError: string,
+  statistics: Array<LinkInfo>,
+  statisticsTotal: number,
+  statisticsError: string,
 };
 
 export type Dispatch = ThunkDispatch<CombinedState<{
@@ -65,6 +75,21 @@ export interface AddLinkError {
   payload: string,
 }
 
+export interface GetStatistics {
+  type: typeof ActionType.GET_STATISTICS,
+  payload: Array<LinkInfo>,
+}
+
+export interface GetStatisticsTotal {
+  type: typeof ActionType.GET_STATISTICS_TOTAL,
+  payload: number,
+}
+
+export interface AddStatisticsError {
+  type: typeof ActionType.ADD_STATISTICS_ERROR,
+  payload: string,
+}
+
 export type UserAction = GetUsername | UpdateAuthStatus | AddLoginError | AddRegisterError;
-export type DataAction = GetShortLink | AddLinkError;
+export type DataAction = GetShortLink | AddLinkError | GetStatistics | GetStatisticsTotal | AddStatisticsError;
 export type Action = UserAction | DataAction;

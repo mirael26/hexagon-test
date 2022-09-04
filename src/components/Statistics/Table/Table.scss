@@ -1,0 +1,38 @@
+@use '../../../scss/mixins.scss';
+@use '../../../scss/variables.scss';
+
+.table {
+  display: flex;
+  flex-direction: column;
+}
+
+.table__headers {
+  @include mixins.text;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: variables.$content-color;
+}
+
+.table__row {
+  @include mixins.text;
+  display: flex;
+  align-items: center;
+  color: variables.$content-color;  
+}
+
+.table__short {
+  width: 20%;
+  padding: 10px 10px;
+}
+
+.table__target {
+  width: 60%;
+  padding: 10px 10px;
+}
+
+.table__counter {
+  width: 20%;
+  padding: 10px 10px;
+}

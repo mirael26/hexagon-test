@@ -8,6 +8,12 @@ import { ActionCreator } from "./action";
 
 const URL = 'http://79.143.31.216';
 
+interface StatisticsQuery {
+  order: string,
+  offset: number,
+  limit: number,
+}
+
 export const login = ({ username, password }: UserInfo) => {
 
   return (dispatch: Dispatch) => {
@@ -17,6 +23,7 @@ export const login = ({ username, password }: UserInfo) => {
         password,
       }))
       .then(response => {
+        localStorage.setItem("bearer-token", response.data.access_token);
         dispatch(ActionCreator.getUsername(username));
         dispatch(ActionCreator.updateAuthStatus(true));
         dispatch(ActionCreator.addLoginError(null));
@@ -71,7 +78,7 @@ export const getShortLink = (link: string) => {
       method: 'post',
       url: `${URL}${ApiUrl.SQUEEZE}`,
       headers: {
-        'Authorization': 'Bearer <token>'
+        'Authorization': `Bearer ${localStorage.getItem("bearer-token")}`        
       },
       params: {
         link
@@ -88,6 +95,68 @@ export const getShortLink = (link: string) => {
         dispatch(ActionCreator.addLinkError('Ошибка авторизации'));
       } else {
         dispatch(ActionCreator.addLinkError('Пожалуйста, попробуйте позднее'));
+      }
+    });
+  };
+};
+
+export const getStatistics = ({order, offset, limit}: StatisticsQuery) => {
+
+  return (dispatch: Dispatch) => {
+    axios({
+      method: 'get',
+      url: `${URL}${ApiUrl.STATISTICS}`,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("bearer-token")}`        
+      },
+      params: {
+        order,
+        offset,
+        limit
+      }
+    })
+    .then(response => {
+      dispatch(ActionCreator.getStatistics(response.data));
+      dispatch(ActionCreator.addStatisticsError(null));
+    })
+    .catch(error => {
+      if (error.response.status == 422) {
+        dispatch(ActionCreator.addLinkError('Ошибка валидации'));
+      } else if (error.response.status == 401) {
+        dispatch(ActionCreator.addLinkError('Ошибка авторизации'));
+      } else {
+        dispatch(ActionCreator.addLinkError('Ошибка загрузки данных'));
+      }
+    });
+  };
+};
+
+export const getStatisticsTotal = ({order, offset, limit}: StatisticsQuery) => {
+
+  return (dispatch: Dispatch) => {
+    axios({
+      method: 'get',
+      url: `${URL}${ApiUrl.STATISTICS}`,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("bearer-token")}`        
+      },
+      params: {
+        order,
+        offset,
+        limit
+      }
+    })
+    .then(response => {
+      dispatch(ActionCreator.getStatisticsTotal(response.data.length));
+      dispatch(ActionCreator.addStatisticsError(null));
+    })
+    .catch(error => {
+      if (error.response.status == 422) {
+        dispatch(ActionCreator.addLinkError('Ошибка валидации'));
+      } else if (error.response.status == 401) {
+        dispatch(ActionCreator.addLinkError('Ошибка авторизации'));
+      } else {
+        dispatch(ActionCreator.addLinkError('Ошибка загрузки данных'));
       }
     });
   };

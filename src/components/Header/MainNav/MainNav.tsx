@@ -13,7 +13,7 @@ const MainNav = ():JSX.Element => {
         <li className="main-nav__item">
           {path === AppUrl.SQUEEZE
             ? <span className="main-nav__link main-nav__link--disabled">Сжатие ссылок</span>
-            : <Link to={AppUrl.STATISTICS} className="main-nav__link">Сжатие ссылок</Link>
+            : <Link to={AppUrl.SQUEEZE} className="main-nav__link">Сжатие ссылок</Link>
           }
         </li>
 
