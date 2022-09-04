@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { createHashHistory } from 'history';
+import { createBrowserHistory } from 'history';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 
 import { AppUrl } from '../consts';
@@ -11,7 +11,7 @@ import ScreensSqueeze from './Squeeze/Squeeze';
 import ScreensStatistics from './Statistics/Statistics';
 import RequireAuth from '../components/RequireAuth/RequireAuth';
 
-export const history = createHashHistory();
+export const history = createBrowserHistory();
 
 const ScreensRoot = () => (
   <HistoryRouter history={history}>
