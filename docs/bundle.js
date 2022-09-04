@@ -5139,7 +5139,7 @@ function history_createBrowserHistory(options) {
 
   if (index == null) {
     index = 0;
-    globalHistory.replaceState((0,esm_extends/* default */.Z)({}, globalHistory.state, {
+    globalHistory.replaceState(_extends({}, globalHistory.state, {
       idx: index
     }), '');
   }
@@ -5154,7 +5154,7 @@ function history_createBrowserHistory(options) {
       state = null;
     }
 
-    return readOnly((0,esm_extends/* default */.Z)({
+    return readOnly(_extends({
       pathname: location.pathname,
       hash: '',
       search: ''
@@ -5385,7 +5385,7 @@ function history_createHashHistory(options) {
 
   if (index == null) {
     index = 0;
-    globalHistory.replaceState(_extends({}, globalHistory.state, {
+    globalHistory.replaceState((0,esm_extends/* default */.Z)({}, globalHistory.state, {
       idx: index
     }), '');
   }
@@ -5412,7 +5412,7 @@ function history_createHashHistory(options) {
       state = null;
     }
 
-    return readOnly(_extends({
+    return readOnly((0,esm_extends/* default */.Z)({
       pathname: location.pathname,
       hash: '',
       search: ''
@@ -7378,7 +7378,7 @@ var RequireAuth = function (_a) {
 
 
 
-var Root_history = history_createBrowserHistory();
+var Root_history = history_createHashHistory();
 var ScreensRoot = function () { return (react.createElement(HistoryRouter, { history: Root_history },
     react.createElement(Routes, null,
         react.createElement(Route, { path: '/', element: react.createElement(Navigate, { replace: true, to: consts/* AppUrl.LOGIN */._r.LOGIN }) }),
